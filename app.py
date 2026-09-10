@@ -140,5 +140,32 @@ def get_key():
 
     return jsonify({"key": FINGERPRINT_KEY})
 
+@app.route('/search-clients', methods=['GET', 'OPTIONS'])
+def search_clients():
+    if request.method == 'OPTIONS':
+        return jsonify({}), 200
+
+    query = request.args.get('query', '')
+    if not query:
+        return jsonify({'clients': []}), 200
+
+    clients = Client.query.filter(
+        (Client.Firstnames.ilike(f'%{query}%')) | (Client.Lastname.ilike(f'%{query}%'))
+    ).all()
+
+    return jsonify({
+        'clients': [
+            {
+                'id': c.IdClient,
+                'firstnames': c.Firstnames,
+                'lastname': c.Lastname,
+                'telephone': c.Telephone,
+                'email': c.Email,
+                'identityNumber': c.IdentityNumber,
+            }
+            for c in clients
+        ]
+    }), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

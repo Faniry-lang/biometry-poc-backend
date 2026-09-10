@@ -1,1 +1,24 @@
 curl -X GET https://biometry-poc-backend.onrender.com/get-key -H "X-Api-Key:PyXeIdCuVs0gf5m4P6lLHPUqxOBwYCAC5e0hTuuo7qE="
+
+curl -X POST https://biometry-poc-backend.onrender.com/clients \
+  -H "Content-Type: application/json" \
+  -d '{
+    "Firstnames": "Jean",
+    "Lastname": "Dupont",
+    "Telephone": "+26134567890",
+    "Email": "jean.dupont@example.com",
+    "IdentityNumber": "1",
+    "IsEnabled": "1",
+    "Comments": "Test client",
+    "BankIdClient": "BANK001"
+  }'
+
+curl -X GET https://biometry-poc-backend.onrender.com/get-client-by-id?id=1
+
+curl -X PUT https://biometry-poc-backend.onrender.com/clients/1/fingerprint \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fingerprint": "encrypted_template_data_here"
+  }'
+
+curl -X GET https://biometry-poc-backend.onrender.com/get-finger-print-by-clientid?id=1
