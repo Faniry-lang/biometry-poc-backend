@@ -2,21 +2,13 @@ from datetime import datetime
 from flask import Flask, jsonify, request, abort
 from database import db
 from models import Client
+from config import DB_URI, FINGERPRINT_KEY, KEY_ENDPOINT_SECRET
 import os
 
 app = Flask(__name__)
 
-USERNAME = 'root'
-PASSWORD = 'root'
-HOST = 'localhost'
-PORT = '3306'
-DB_NAME = 'agdbk_biometry_poc'
-
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}'
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-FINGERPRINT_KEY = 'VC6v8iWsGP3hsPGT5gTPYAQTiMSdWIPNkTB9jhEwtWE='         # base64-encoded 32-byte AES key
-KEY_ENDPOINT_SECRET = 'PyXeIdCuVs0gf5m4P6lLHPUqxOBwYCAC5e0hTuuo7qE='  # shared secret gating this endpoint
 
 db.init_app(app)
 

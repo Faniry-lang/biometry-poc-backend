@@ -1,12 +1,11 @@
-from sqlalchemy import Column, String, CHAR, DateTime, LargeBinary
-from sqlalchemy.dialects.mysql import INTEGER
+from sqlalchemy import Column, String, CHAR, DateTime, LargeBinary, Integer
 from database import db
 
 class Client(db.Model):
     __tablename__ = "Clients"
 
     IdClient = Column(
-        INTEGER(unsigned=True),
+        Integer,
         primary_key=True,
         autoincrement=True,
         nullable=False
