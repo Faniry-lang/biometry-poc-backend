@@ -1,0 +1,1 @@
+curl -X GET http://localhost:5000/get-key -H "X-Api-Key:PyXeIdCuVs0gf5m4P6lLHPUqxOBwYCAC5e0hTuuo7qE="
