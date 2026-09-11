@@ -1,19 +1,41 @@
-CREATE TABLE Clients (
-    IdClient                 INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    Firstnames               VARCHAR(255) NULL,
-    Lastname                 VARCHAR(255) NULL,
-    Telephone                VARCHAR(55) NULL,
-    Email                    VARCHAR(255) NULL,
-    IdentityNumber           VARCHAR(50) NULL,
-    IsEnabled                CHAR(1) NULL,
-    Comments                 VARCHAR(255) NULL,
-    DateTimeCreated          DATETIME NULL,
-    DateTimeModified         DATETIME NULL,
-    BankIdClient              VARCHAR(55) NULL,
-    DateTimeActivationToggle DATETIME NULL,
-    Fingerprint              BLOB NULL,
+CREATE TABLE "Clients" (
+    "IdClient" INTEGER GENERATED ALWAYS AS IDENTITY NOT NULL,
+    "Firstnames" VARCHAR(255),
+    "Lastname" VARCHAR(255),
+    "Telephone" VARCHAR(55),
+    "Email" VARCHAR(255),
+    "IdentityNumber" VARCHAR(50),
+    "IsEnabled" CHAR(1),
+    "Comments" VARCHAR(255),
+    "DateTimeCreated" TIMESTAMP,
+    "DateTimeModified" TIMESTAMP,
+    "BankIdClient" VARCHAR(55),
+    "DateTimeActivationToggle" TIMESTAMP,
 
-    PRIMARY KEY (IdClient),
-    UNIQUE KEY uq_client_telephone (Telephone),
-    UNIQUE KEY uq_client_email (Email)
+    PRIMARY KEY ("IdClient"),
+
+    CONSTRAINT "uq_client_telephone"
+        UNIQUE ("Telephone"),
+
+    CONSTRAINT "uq_client_email"
+        UNIQUE ("Email")
+);
+
+
+CREATE TABLE "Fingerprints" (
+    "IdFingerprint" INTEGER GENERATED ALWAYS AS IDENTITY NOT NULL,
+    "IdClient" INTEGER NOT NULL,
+    "FingerprintLabel" VARCHAR NOT NULL,
+    "CipherText" BYTEA NOT NULL,
+    "IV" TEXT NOT NULL,
+    "Tag" TEXT NOT NULL,
+    "CreatedAt" TIMESTAMP NOT NULL,
+    "RevokedAt" TIMESTAMP,
+
+    PRIMARY KEY ("IdFingerprint"),
+
+    CONSTRAINT "fk_fingerprint_client"
+        FOREIGN KEY ("IdClient")
+        REFERENCES "Clients" ("IdClient")
+        ON DELETE CASCADE
 );
