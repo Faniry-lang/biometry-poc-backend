@@ -1,5 +1,5 @@
 from datetime import datetime
-from operator import and_
+from sqlalchemy import and_
 from flask import Flask, jsonify, request, abort
 from database import db
 from models import Client, Fingerprint
