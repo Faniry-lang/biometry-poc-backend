@@ -227,7 +227,7 @@ def get_fingerprints_by_clientid():
             'IdFingerprint': fingerprint.IdFingerprint,
             'IdClient': fingerprint.IdClient,
             'FingerprintLabel': fingerprint.FingerprintLabel,
-            'CipherText': fingerprint.CipherText,
+            'CipherText': fingerprint.CipherText.decode('utf-8'),
             'IV': fingerprint.IV,
             'Tag': fingerprint.Tag,
             'CreatedAt': fingerprint.CreatedAt.isoformat()
