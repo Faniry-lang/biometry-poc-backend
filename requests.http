@@ -1,2 +1,2 @@
 curl -X GET https://biometry-poc-backend.onrender.com/get-key -H "X-Api-Key:PyXeIdCuVs0gf5m4P6lLHPUqxOBwYCAC5e0hTuuo7qE="
-curl -X GET https://biometry-poc-backend.onrender.com/get-finger-print-by-clientid?id=1 -H "X-Api-Key:PyXeIdCuVs0gf5m4P6lLHPUqxOBwYCAC5e0hTuuo7qE="
+curl -X GET https://biometry-poc-backend.onrender.com/get-fingerprints-by-clientid?id=1 -H "X-Api-Key:PyXeIdCuVs0gf5m4P6lLHPUqxOBwYCAC5e0hTuuo7qE="
